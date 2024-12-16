@@ -18,8 +18,8 @@ Part of the A-CSD training course.
 
 ### Branches ###
 
-* master: empty
-* 1-bank-account-java: basic project, no implementation
+* master: setup for introductory addition exercise
+* 1-addition-with-bdd-solution: solution for the addition exercise
 
 
 
