@@ -13,5 +13,5 @@ Feature: Bank Account withdrawal
 
     Given a bank account with the initial balance of 1000
     When a client withdraws 1100
-    Then the transaction should be cancelled
+    Then the withdrawal should be cancelled
     And the account should have a balance of 1000
