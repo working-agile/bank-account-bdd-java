@@ -24,11 +24,6 @@ public class BankAccount {
         balance = balance - amountToWithdraw;
     }
 
-    public void transfer(Integer transferAmount, BankAccount bankAccountReceiver) throws InsufficientBalanceException {
-        withdraw(transferAmount);
-        bankAccountReceiver.deposit(transferAmount);
-    }
-
     public static class InsufficientBalanceException extends Exception {}
 
 }
