@@ -49,8 +49,8 @@ public class BankAccountStepDefs {
 
     Exception exception;
 
-    @Then("the transaction should be cancelled")
-    public void the_transaction_should_be_cancelled() {
+    @Then("the withdrawal should be cancelled")
+    public void the_withdrawal_should_be_cancelled() {
 
         assertThat(exception, is(not(nullValue())));
         assertThat(exception, is(instanceOf(BankAccount.InsufficientBalanceException.class)));
