@@ -39,8 +39,8 @@ public class BankAccountStepDefs {
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("the transaction should be cancelled")
-    public void the_transaction_should_be_cancelled() {
+    @Then("the withdrawal should be cancelled")
+    public void the_withdrawal_should_be_cancelled() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
