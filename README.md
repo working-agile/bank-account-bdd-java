@@ -29,6 +29,12 @@ Part of the A-CSD training course.
 * 4-b-bank-account-withdrawal-scenarios: scenarios formulated
 * 4-c-bank-account-withdrawal-scenarios-implemented: scenarios implemented
 
+* 5-a-bank-account-transfer-todo: start writing the scenarios here
+* 5-b-bank-account-transfer-scenarios: scenarios formulated
+* 5-c-bank-account-transfer-scenarios: scenarios implemented
+* 5-d-bank-account-transfer-with-scenario-templates
+* 5-e-bank-account-transfer-with-scenario-templates: formulated
+* 5-f-bank-account-transfer-with-scenario-templates: implemented
 
 
 
