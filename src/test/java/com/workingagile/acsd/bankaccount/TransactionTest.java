@@ -1,44 +1,31 @@
 package com.workingagile.acsd.bankaccount;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TransactionTest {
 
-    @Test
-    public void should_return_value_of_transaction() {
+    @ParameterizedTest
+    @EnumSource(value = Transaction.Type.class, names = {"DEPOSIT", "WITHDRAWAL"})
+    void define_a_deposit_transaction(Transaction.Type type) {
 
-        Transaction depositTransaction = new Transaction("deposit", "100");
+        Transaction depositTransaction = new Transaction(type, "100");
 
+        assertEquals(depositTransaction.getType(), type);
         assertThat(depositTransaction.getValue(), is(equalTo("100")));
 
     }
 
     @Test
-    public void should_return_type_of_transaction() {
-
-        Transaction depositTransaction = new Transaction("deposit", "100");
-
-        assertThat(depositTransaction.getType(), is(equalTo("deposit")));
-
+    public void convert_string_to_type() {
+        Transaction.Type type = Transaction.Type.valueOf("DEPOSIT");
+        assertThat(type, is(equalTo(Transaction.Type.DEPOSIT)));
     }
-
-    @Test
-    public void should_refuse_unknown_transaction_type() {
-
-        try {
-            new Transaction("unknown", "100");
-            fail("should not accept unknown transaction types");
-        } catch(IllegalArgumentException e) {}
-
-    }
-
-
-
-
 
 }

@@ -9,10 +9,10 @@ bank statement.
     Given Nathan with a bank account and initial balance of 1000
     And the following transaction history
       | transaction | amount |
-      | deposit     | 50     |
-      | withdrawal  | -30    |
-      | deposit     | 100    |
-      | deposit     | 20     |
+      | DEPOSIT     | 50     |
+      | WITHDRAWAL  | -30    |
+      | DEPOSIT     | 100    |
+      | DEPOSIT     | 20     |
     When Nathan requests a bank statement
     Then he should receive a bank statement containing:
     """

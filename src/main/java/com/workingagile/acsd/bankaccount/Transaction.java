@@ -2,24 +2,28 @@ package com.workingagile.acsd.bankaccount;
 
 public class Transaction {
 
+    public enum Type {
+        DEPOSIT, WITHDRAWAL
+    }
+
+    Type type;
     String value;
-    String type;
 
-    public Transaction(String transactionType, String transactionValue) {
+    public Transaction(Type type, String transactionValue) {
 
-        if (transactionType == null || transactionType != "deposit") {
+        if (type == null) {
             throw new IllegalArgumentException("unknown transaction type");
         }
 
         value = transactionValue;
-        type = transactionType;
+        this.type = type;
     }
 
     public String getValue() {
         return value;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 }

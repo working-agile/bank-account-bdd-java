@@ -34,10 +34,10 @@ public class BankAccountStatementStepDefs {
         List<Transaction> transactions = new ArrayList<Transaction>();
         for (Map<String, String> transactionEntry: transactionEntries) {
 
-            String transactionType = transactionEntry.get("transaction");
             String transactionValue = transactionEntry.get("amount");
-
-            transactions.add(new Transaction(transactionType,  transactionValue));
+            String transactionTypeString = transactionEntry.get("transaction");
+            Transaction.Type type = Transaction.Type.valueOf(transactionTypeString);
+            transactions.add(new Transaction(type,  transactionValue));
         }
 
         transactionHistoryMock = mock(TransactionHistory.class);
