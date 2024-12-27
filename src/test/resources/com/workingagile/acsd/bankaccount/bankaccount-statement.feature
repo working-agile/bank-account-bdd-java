@@ -6,7 +6,7 @@ bank statement.
 
   Scenario: Bank statements contain the current balance and the transaction history
 
-    Given Nathan with a bank account and initial balance of 1000
+    Given Nathan with a bank account and balance of 1140
     And the following transaction history
       | transaction | amount |
       | DEPOSIT     | 50     |

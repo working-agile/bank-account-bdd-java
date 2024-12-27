@@ -19,7 +19,7 @@ public class BankAccountStatementStepDefs {
     BankAccount bankAccountNathan;
     TransactionHistory transactionHistoryMock;
 
-    @Given("Nathan with a bank account and initial balance of {int}")
+    @Given("Nathan with a bank account and balance of {int}")
     public void nathan_with_a_bank_account_and_initial_balance_of(Integer initialBalance) {
 
         bankAccountNathan = new BankAccount(initialBalance);
@@ -42,6 +42,9 @@ public class BankAccountStatementStepDefs {
 
         transactionHistoryMock = mock(TransactionHistory.class);
         Mockito.when(transactionHistoryMock.getTransactionHistory()).thenReturn(transactions);
+
+        // Inject the dependency
+        bankAccountNathan.setTransactionHistory(transactionHistoryMock);
 
     }
 

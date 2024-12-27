@@ -19,6 +19,7 @@ public class BankAccountStepDefs {
         bankAccount = new BankAccount(initialBalance);
 
     }
+
     @When("a client deposits {int}")
     public void a_client_deposits(Integer amount) {
 

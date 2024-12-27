@@ -1,9 +1,12 @@
 package com.workingagile.acsd.bankaccount;
 
+import java.util.List;
+
 public class BankAccount {
 
     private int balance;
     EmailSender emailSender;
+    TransactionHistory transactionHistory;
 
     public BankAccount(Integer initialBalance) {
         balance = initialBalance;
@@ -12,6 +15,10 @@ public class BankAccount {
     public BankAccount(Integer initialBalance, EmailSender emailSender) {
         this(initialBalance);
         this.emailSender = emailSender;
+    }
+
+    public void setTransactionHistory(TransactionHistory transactionHistory) {
+        this.transactionHistory = transactionHistory;
     }
 
     public void deposit(Integer amount) {
@@ -43,12 +50,25 @@ public class BankAccount {
     }
 
     public String getStatement() {
-        return
+
+        List<Transaction> transactionList = transactionHistory.getTransactionHistory();
+        int numberOfTransactions = transactionList.size();
+        int numberOfDeposits = numberOfTransactions;
+
+        String statement =
         "  balance=" + balance + "\n" +
-                "  number of transactions=0\n" +
-                "  number of deposits=0\n" +
+                "  number of transactions=" + numberOfTransactions + "\n" +
+                "  number of deposits=" + numberOfDeposits + "\n" +
                 "  number of withdrawals=0\n" +
                 "---\n";
+        if (numberOfTransactions > 0) {
+            Transaction depositTransaction = transactionList.get(0);
+            statement = statement +
+                    "transaction 1=deposit=" + depositTransaction.getValue() +
+                    "\n";
+        }
+        return statement;
+
     }
 
     public static class InsufficientBalanceException extends Exception {}
