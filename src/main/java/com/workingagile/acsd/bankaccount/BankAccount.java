@@ -55,19 +55,19 @@ public class BankAccount {
         int numberOfTransactions = transactionList.size();
         int numberOfDeposits = numberOfTransactions;
 
-        String statement =
+        StringBuffer statement = new StringBuffer();
+        statement.append(
         "  balance=" + balance + "\n" +
                 "  number of transactions=" + numberOfTransactions + "\n" +
                 "  number of deposits=" + numberOfDeposits + "\n" +
                 "  number of withdrawals=0\n" +
-                "---\n";
+                "---\n"
+        );
         if (numberOfTransactions > 0) {
             Transaction depositTransaction = transactionList.get(0);
-            statement = statement +
-                    "transaction 1=deposit=" + depositTransaction.getValue() +
-                    "\n";
+            statement.append("transaction 1=deposit=").append(depositTransaction.getValue()).append("\n");
         }
-        return statement;
+        return statement.toString();
 
     }
 
