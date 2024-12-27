@@ -43,7 +43,12 @@ public class BankAccount {
     }
 
     public String getStatement() {
-        return null;
+        return
+        "  balance=" + balance + "\n" +
+                "  number of transactions=0\n" +
+                "  number of deposits=0\n" +
+                "  number of withdrawals=0\n" +
+                "---\n";
     }
 
     public static class InsufficientBalanceException extends Exception {}
