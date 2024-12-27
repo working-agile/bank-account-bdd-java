@@ -55,7 +55,7 @@ public class BankAccount {
         int numberOfTransactions = transactionList.size();
         int numberOfDeposits = numberOfTransactions;
 
-        StringBuffer statement = new StringBuffer();
+        StringBuilder statement = new StringBuilder();
         statement.append(
         "  balance=" + balance + "\n" +
                 "  number of transactions=" + numberOfTransactions + "\n" +
