@@ -28,4 +28,15 @@ public class TransactionTest {
         assertThat(type, is(equalTo(Transaction.Type.DEPOSIT)));
     }
 
+    @Test
+    public void convert_value_to_int() {
+
+        Transaction depositTransaction = new Transaction(Transaction.Type.DEPOSIT, "100");
+
+        Integer intValue = depositTransaction.getIntValue();
+
+        assertThat(intValue, is(equalTo(100)));
+
+    }
+
 }

@@ -53,19 +53,40 @@ public class BankAccount {
 
         List<Transaction> transactionList = transactionHistory.getTransactionHistory();
         int numberOfTransactions = transactionList.size();
-        int numberOfDeposits = numberOfTransactions;
+        long numberOfDeposits = transactionList.stream()
+                .filter(transaction -> transaction.getType() == Transaction.Type.DEPOSIT)
+                .count();
+        long numberOfWithdrawals = numberOfTransactions - numberOfDeposits;
 
         StringBuilder statement = new StringBuilder();
         statement.append(
         "  balance=" + balance + "\n" +
                 "  number of transactions=" + numberOfTransactions + "\n" +
                 "  number of deposits=" + numberOfDeposits + "\n" +
-                "  number of withdrawals=0\n" +
-                "---\n"
+                "  number of withdrawals=" + numberOfWithdrawals + "\n" +
+                "  ---\n"
         );
         if (numberOfTransactions > 0) {
-            Transaction depositTransaction = transactionList.get(0);
-            statement.append("transaction 1=deposit=").append(depositTransaction.getValue()).append("\n");
+
+            int numberTransactions = transactionList.size();
+            for (int i=0; i<numberTransactions; i++) {
+
+                Transaction transaction = transactionList.get(i);
+                statement.append("  transaction ")
+                        .append(i+1)
+                        .append("=");
+                if (transaction.getType() == Transaction.Type.DEPOSIT) {
+                    statement.append("deposit");
+                } else {
+                    statement.append("withdrawal");
+                }
+                Integer value = transaction.getIntValue();
+                if (value < 0) {
+                    value = -value;
+                }
+                statement.append("=").append(value).append("\n");
+            }
+
         }
         return statement.toString();
 

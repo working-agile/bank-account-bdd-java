@@ -2,6 +2,10 @@ package com.workingagile.acsd.bankaccount;
 
 public class Transaction {
 
+    public Integer getIntValue() {
+        return Integer.valueOf(value);
+    }
+
     public enum Type {
         DEPOSIT, WITHDRAWAL
     }
