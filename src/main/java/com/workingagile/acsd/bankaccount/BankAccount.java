@@ -74,11 +74,11 @@ public class BankAccount {
                 Transaction transaction = transactionList.get(i);
                 statement.append("  transaction ")
                         .append(i+1)
-                        .append("=");
+                        .append(": ");
                 if (transaction.getType() == Transaction.Type.DEPOSIT) {
-                    statement.append("deposit");
+                    statement.append("D");
                 } else {
-                    statement.append("withdrawal");
+                    statement.append("W");
                 }
                 Integer value = transaction.getIntValue();
                 if (value < 0) {

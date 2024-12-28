@@ -19,14 +19,14 @@ public class BankAccountStatementStepDefs {
     BankAccount bankAccountNathan;
     TransactionHistory transactionHistoryMock;
 
-    @Given("Nathan with a bank account and balance of {int}")
-    public void nathan_with_a_bank_account_and_initial_balance_of(Integer initialBalance) {
+    @Given("Nathan with a bank account with balance of {int}")
+    public void nathan_with_a_bank_account_with_balance_of(Integer balance) {
 
-        bankAccountNathan = new BankAccount(initialBalance);
+        bankAccountNathan = new BankAccount(balance);
 
     }
 
-    @Given("the following transaction history")
+    @Given("the following transaction history:")
     public void the_following_transaction_history(DataTable transactionsDatatable) {
 
         List<Map<String, String>> transactionEntries =  transactionsDatatable.asMaps();
@@ -57,8 +57,8 @@ public class BankAccountStatementStepDefs {
 
     }
 
-    @Then("he should receive a bank statement containing:")
-    public void he_should_receive_a_bank_statement_containing(String expectedStatement) {
+    @Then("he should receive the bank statement containing:")
+    public void he_should_receive_the_bank_statement_containing(String expectedStatement) {
 
         assertThat(bankStatement, is(expectedStatement));
     }
