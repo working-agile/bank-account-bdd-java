@@ -68,8 +68,7 @@ public class BankAccount {
         );
         if (numberOfTransactions > 0) {
 
-            int numberTransactions = transactionList.size();
-            for (int i=0; i<numberTransactions; i++) {
+            for (int i=0; i<numberOfTransactions; i++) {
 
                 Transaction transaction = transactionList.get(i);
                 statement.append("  transaction ")
