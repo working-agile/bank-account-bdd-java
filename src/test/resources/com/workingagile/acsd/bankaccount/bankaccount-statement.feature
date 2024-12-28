@@ -8,22 +8,25 @@ Feature: Bank statements
     Given Nathan with a bank account with balance of 1140
     And the following transaction history:
       | transaction | amount |
-      | deposit     | 50     |
-      | withdrawal  | -30    |
-      | deposit     | 100    |
-      | deposit     | 20     |
+      | DEPOSIT     | 50     |
+      | WITHDRAWAL  | -30    |
+      | DEPOSIT     | 100    |
+      | DEPOSIT     | 20     |
+      | WITHDRAWAL  | -10    |
     When Nathan requests a bank statement
     Then he should receive the bank statement containing:
     """
       balance=1140
-      number of transactions=4
+      number of transactions=5
       number of deposits=3
-      number of withdrawals=1
+      number of withdrawals=2
       ---
       transaction 1: D=50
       transaction 2: W=30
       transaction 3: D=100
       transaction 4: D=20
+      transaction 5: W=10
+
     """
 
 
