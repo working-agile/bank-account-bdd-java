@@ -37,7 +37,7 @@ public class BankAccountStatementTest {
                 "  number of deposits=0\n" +
                 "  number of withdrawals=0\n" +
                 "  ---\n";
-                assertThat(actualStatement, is(equalTo(expectedStatement)));
+        assertThat(actualStatement, is(equalTo(expectedStatement)));
     }
 
     @Test
