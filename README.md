@@ -45,7 +45,9 @@ Part of the A-CSD training course.
 * 6-b-bank-account-overdraft-with-email-scenario-formulated
 * 6-c-bank-account-overdraft-with-email-scenario-implemented
 
-
+* 7-a-bank-account-bank-statement-todo
+* 7-b-bank-account-bank-statement-scenario-formulated
+* 7-c-bank-account-bank-statement-scenario-implemented
 
 
 
