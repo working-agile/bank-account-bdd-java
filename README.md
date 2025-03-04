@@ -17,7 +17,7 @@ Part of the A-CSD training course.
 
 ### Branches ###
 
-* main: empty
+* master: empty
 * 1-addition-with-bdd-solution: solution to addition exercise
 * 2-addition-with-bdd-solution-refactored: introduction of domain object
 
