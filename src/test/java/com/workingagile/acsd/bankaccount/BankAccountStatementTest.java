@@ -63,7 +63,7 @@ public class BankAccountStatementTest {
                         "  number of deposits=1\n" +
                         "  number of withdrawals=0\n" +
                         "  ---\n" +
-                        "  transaction 1=deposit=100\n";
+                        "  transaction 1: D=100\n";
         assertThat(actualStatement, is(equalTo(expectedStatement)));
     }
 
@@ -91,8 +91,8 @@ public class BankAccountStatementTest {
                         "  number of deposits=2\n" +
                         "  number of withdrawals=0\n" +
                         "  ---\n" +
-                        "  transaction 1=deposit=100\n" +
-                        "  transaction 2=deposit=50\n";
+                        "  transaction 1: D=100\n" +
+                        "  transaction 2: D=50\n";
         assertThat(actualStatement, is(equalTo(expectedStatement)));
     }
 
@@ -121,9 +121,9 @@ public class BankAccountStatementTest {
                         "  number of deposits=2\n" +
                         "  number of withdrawals=1\n" +
                         "  ---\n" +
-                        "  transaction 1=deposit=100\n" +
-                        "  transaction 2=deposit=50\n" +
-                        "  transaction 3=withdrawal=30\n";
+                        "  transaction 1: D=100\n" +
+                        "  transaction 2: D=50\n" +
+                        "  transaction 3: W=30\n";
         assertThat(actualStatement, is(equalTo(expectedStatement)));
     }
 
