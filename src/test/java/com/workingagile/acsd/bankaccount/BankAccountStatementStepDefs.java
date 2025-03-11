@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class BankAccountStatementStepDefs {
 
     BankAccount bankAccountNathan;
-    TransactionHistory transactionHistoryMock;
+    TransactionHistory transactionHistoryStub;
 
     @Given("Nathan with a bank account with balance of {int}")
     public void nathan_with_a_bank_account_with_balance_of(Integer balance) {
@@ -31,7 +31,7 @@ public class BankAccountStatementStepDefs {
 
         List<Map<String, String>> transactionEntries =  transactionsDatatable.asMaps();
 
-        List<Transaction> transactions = new ArrayList<Transaction>();
+        List<Transaction> transactions = new ArrayList<>();
         for (Map<String, String> transactionEntry: transactionEntries) {
 
             String transactionValue = transactionEntry.get("amount");
@@ -40,11 +40,11 @@ public class BankAccountStatementStepDefs {
             transactions.add(new Transaction(type,  transactionValue));
         }
 
-        transactionHistoryMock = mock(TransactionHistory.class);
-        Mockito.when(transactionHistoryMock.getTransactionHistory()).thenReturn(transactions);
+        transactionHistoryStub = mock(TransactionHistory.class);
+        Mockito.when(transactionHistoryStub.getTransactionHistory()).thenReturn(transactions);
 
         // Inject the dependency
-        bankAccountNathan.setTransactionHistory(transactionHistoryMock);
+        bankAccountNathan.setTransactionHistory(transactionHistoryStub);
 
     }
 
