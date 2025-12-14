@@ -12,7 +12,7 @@ Feature: Transfer between bank accounts
 
     Given Nathan has a bank account with 1000
     And Sabrina has a bank account with 500
-    When Nathan tries to transfers 1001 to Sabrina
+    When Nathan transfers 1001 to Sabrina
     Then the transfer should be cancelled
     And both should have the same amount in their accounts
 
