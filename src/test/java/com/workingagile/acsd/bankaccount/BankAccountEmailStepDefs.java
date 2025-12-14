@@ -23,7 +23,7 @@ public class BankAccountEmailStepDefs {
             bankAccount.withdraw(2000);
             fail("Not expected to get here");
 
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
     }
