@@ -1,28 +1,26 @@
 Feature: Transfer between bank accounts
 
-  Scenario: A client transfers an amount to another account
+  Background:
+    Given Nathan has a bank account with a balance of 1000 USD
+    And Sabrina has a bank account with a balance of 500 USD
 
-    Given Nathan has a bank account with 1000
-    And Sabrina has a bank account with 500
-    When Nathan transfers 150 to Sabrina
-    Then Sabrina should have 650
-    And Nathan should have 850
+  Scenario: Successful transfer between two accounts
 
-  Scenario: A client cannot transfers more money than is in the account
+    When Nathan transfers 150 USD to Sabrina
+    Then Sabrina should have a balance of 650 USD
+    And Nathan should have a balance of 850 USD
 
-    Given Nathan has a bank account with 1000
-    And Sabrina has a bank account with 500
-    When Nathan transfers 1001 to Sabrina
-    Then the transfer should be cancelled
-    And both should have the same amount in their accounts
+  Scenario: Transfer is rejected when the sender has insufficient funds
 
-  Scenario: Transfer fee is charged when transferring money between accounts
+    When Nathan transfers 1001 USD to Sabrina
+    Then the transfer should be rejected
+    And no money should have been moved
+
+  Scenario: Transfer fee is deducted from the sender account
 
   The bank can charge a transfer fee.
 
-    Given the bank is charging a transfer fee of 10
-    And Nathan has a bank account with 1000
-    And Sabrina has a bank account with 500
-    When Nathan transfers 150 to Sabrina
-    Then Sabrina should have 650
-    And Nathan should have 840
+    Given the bank is charging a transfer fee of 10 USD
+    When Nathan transfers 150 USD to Sabrina
+    Then Sabrina should have a balance of 650 USD
+    And Nathan should have a balance of 840 USD
