@@ -55,7 +55,7 @@ public class EmailIntegrationTest {
     void sendEmailWhenOverdraft() throws MessagingException {
 
         // Arrange (Given)
-        SimpleEmailSender emailSender = new SimpleEmailSender();
+        EmailSender emailSender = new SimpleEmailSender();
         BankAccount bankAccount = new BankAccount(1000, emailSender);
 
         // Act (When)
