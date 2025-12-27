@@ -20,11 +20,11 @@ public class BankAccountStatementTest {
     public void empty_statement_initial_balance(int initialBalance) {
 
         // Arrange
-        BankAccount myBankAccount = new BankAccount(initialBalance);
+
         List<Transaction> transactionList = new ArrayList<>();
         TransactionHistory transactionHistoryMock = mock(TransactionHistory.class);
         Mockito.when(transactionHistoryMock.getTransactionHistory()).thenReturn(transactionList);
-        myBankAccount.setTransactionHistory(transactionHistoryMock);
+        BankAccount myBankAccount = new BankAccount(initialBalance, null, transactionHistoryMock);
 
         // Act
         String actualStatement = myBankAccount.getStatement();
@@ -44,13 +44,11 @@ public class BankAccountStatementTest {
     public void one_deposit_with_initial_balance_of_1000() {
 
         // Arrange
-        BankAccount myBankAccount = new BankAccount(1000);
-
         List<Transaction> transactionList = new ArrayList<>();
         transactionList.add(new Transaction(Transaction.Type.DEPOSIT, "100"));
         TransactionHistory transactionHistoryMock = mock(TransactionHistory.class);
         Mockito.when(transactionHistoryMock.getTransactionHistory()).thenReturn(transactionList);
-        myBankAccount.setTransactionHistory(transactionHistoryMock);
+        BankAccount myBankAccount = new BankAccount(1000, null, transactionHistoryMock);
 
         // Act
         String actualStatement = myBankAccount.getStatement();
@@ -58,12 +56,14 @@ public class BankAccountStatementTest {
         // Assert
         String expectedStatement;
         expectedStatement =
-                        "  balance=1000\n" +
-                        "  number of transactions=1\n" +
-                        "  number of deposits=1\n" +
-                        "  number of withdrawals=0\n" +
-                        "  ---\n" +
-                        "  transaction 1: D=100\n";
+                """
+                  balance=1000
+                  number of transactions=1
+                  number of deposits=1
+                  number of withdrawals=0
+                  ---
+                  transaction 1: D=100
+                """;
         assertThat(actualStatement, is(equalTo(expectedStatement)));
     }
 
@@ -71,14 +71,12 @@ public class BankAccountStatementTest {
     public void two_deposits_with_initial_balance_of_1000() {
 
         // Arrange
-        BankAccount myBankAccount = new BankAccount(1000);
-
         List<Transaction> transactionList = new ArrayList<>();
         transactionList.add(new Transaction(Transaction.Type.DEPOSIT, "100"));
         transactionList.add(new Transaction(Transaction.Type.DEPOSIT, "50"));
         TransactionHistory transactionHistoryMock = mock(TransactionHistory.class);
         Mockito.when(transactionHistoryMock.getTransactionHistory()).thenReturn(transactionList);
-        myBankAccount.setTransactionHistory(transactionHistoryMock);
+        BankAccount myBankAccount = new BankAccount(1000, null, transactionHistoryMock);
 
         // Act
         String actualStatement = myBankAccount.getStatement();
@@ -86,13 +84,15 @@ public class BankAccountStatementTest {
         // Assert
         String expectedStatement;
         expectedStatement =
-                        "  balance=1000\n" +
-                        "  number of transactions=2\n" +
-                        "  number of deposits=2\n" +
-                        "  number of withdrawals=0\n" +
-                        "  ---\n" +
-                        "  transaction 1: D=100\n" +
-                        "  transaction 2: D=50\n";
+                """
+                  balance=1000
+                  number of transactions=2
+                  number of deposits=2
+                  number of withdrawals=0
+                  ---
+                  transaction 1: D=100
+                  transaction 2: D=50
+                """;
         assertThat(actualStatement, is(equalTo(expectedStatement)));
     }
 
@@ -100,8 +100,6 @@ public class BankAccountStatementTest {
     public void two_deposits_and_1_withdrawal_with_initial_balance_of_1000() {
 
         // Arrange
-        BankAccount myBankAccount = new BankAccount(1000);
-
         List<Transaction> transactionList = new ArrayList<>();
         transactionList.add(new Transaction(Transaction.Type.DEPOSIT, "100"));
         transactionList.add(new Transaction(Transaction.Type.DEPOSIT, "50"));
@@ -109,21 +107,23 @@ public class BankAccountStatementTest {
 
         TransactionHistory transactionHistoryMock = mock(TransactionHistory.class);
         Mockito.when(transactionHistoryMock.getTransactionHistory()).thenReturn(transactionList);
-        myBankAccount.setTransactionHistory(transactionHistoryMock);
+        BankAccount myBankAccount = new BankAccount(1000, null, transactionHistoryMock);
 
         // Act
         String actualStatement = myBankAccount.getStatement();
 
         // Assert
         String expectedStatement =
-                "  balance=1000\n" +
-                        "  number of transactions=3\n" +
-                        "  number of deposits=2\n" +
-                        "  number of withdrawals=1\n" +
-                        "  ---\n" +
-                        "  transaction 1: D=100\n" +
-                        "  transaction 2: D=50\n" +
-                        "  transaction 3: W=30\n";
+                """
+                  balance=1000
+                  number of transactions=3
+                  number of deposits=2
+                  number of withdrawals=1
+                  ---
+                  transaction 1: D=100
+                  transaction 2: D=50
+                  transaction 3: W=30
+                """;
         assertThat(actualStatement, is(equalTo(expectedStatement)));
     }
 

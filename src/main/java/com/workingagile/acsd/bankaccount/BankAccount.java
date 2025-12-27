@@ -17,7 +17,8 @@ public class BankAccount {
         this.emailSender = emailSender;
     }
 
-    public void setTransactionHistory(TransactionHistory transactionHistory) {
+    public BankAccount(Integer initialBalance, EmailSender emailSender, TransactionHistory transactionHistory) {
+        this(initialBalance, emailSender);
         this.transactionHistory = transactionHistory;
     }
 
