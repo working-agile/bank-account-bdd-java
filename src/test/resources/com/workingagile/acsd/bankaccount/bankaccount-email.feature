@@ -5,5 +5,7 @@ Feature: Email alerts
   Overdrafting can happen in multiple ways. When it happens,
   an email alert is sent to the bank administration.
 
-    When a client overdrafts his account
-    Then an email alert is sent to the bank
+    Given a customer account has a balance of 100 USD
+    When the customer tries to withdraw 150 USD
+    Then the withdrawal should be rejected
+    And an email alert is sent to the bank administration
