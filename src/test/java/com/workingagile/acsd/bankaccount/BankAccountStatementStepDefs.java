@@ -1,6 +1,7 @@
 package com.workingagile.acsd.bankaccount;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,11 +20,9 @@ public class BankAccountStatementStepDefs {
     BankAccount bankAccountNathan;
     TransactionHistory transactionHistoryStub;
 
-    @Given("Nathan with a bank account with balance of {int}")
-    public void nathan_with_a_bank_account_with_balance_of(Integer balance) {
-
+    @Given("the customer Nathan with a bank account with balance of {int} USD")
+    public void theCustomerNathanWithABankAccountWithBalanceOfUSD(int balance) {
         bankAccountNathan = new BankAccount(balance);
-
     }
 
     @Given("the following transaction history:")
@@ -57,10 +56,11 @@ public class BankAccountStatementStepDefs {
 
     }
 
-    @Then("he should receive the bank statement containing:")
-    public void he_should_receive_the_bank_statement_containing(String expectedStatement) {
+    @Then("he should receive the following bank statement printout:")
+    public void heShouldReceiveTheFollowingBankStatementPrintout(String expectedStatement) {
 
         assertThat(bankStatement, is(expectedStatement));
+
     }
 
 }
