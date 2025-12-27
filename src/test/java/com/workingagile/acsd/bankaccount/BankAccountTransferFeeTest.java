@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class BankAccountTransferFeeTest {
 
     @Test
-    public void should_deduct_fee_from_sender_when_transfering_money() throws Exception {
+    public void should_deduct_fee_from_sender_when_transferring_money() throws Exception {
 
         // Arrange
         BankAccount bankAccountSender = new BankAccount(1000);
