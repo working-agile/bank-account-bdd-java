@@ -9,7 +9,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 public class BankAccountTransferOutlineStepDefs {
 
     Integer transferFee;
@@ -61,7 +60,6 @@ public class BankAccountTransferOutlineStepDefs {
 
     @Then("the resulting balances should be:")
     public void the_resulting_balances_should_be(DataTable expectedBalances) {
-
 
         Integer expectedBalanceNathan = Integer.valueOf(expectedBalances.asMap().get("Nathan"));
         assertThat(expectedBalanceNathan, is(equalTo(bankAccountNathan.getBalance())));
