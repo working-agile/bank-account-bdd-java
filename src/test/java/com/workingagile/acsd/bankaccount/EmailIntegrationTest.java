@@ -19,6 +19,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class EmailIntegrationTest {
@@ -60,6 +61,7 @@ public class EmailIntegrationTest {
         // Act (When)
         try {
             bankAccount.withdraw(2000);
+            fail("should not come here after overdraft");
         } catch (BankAccount.InsufficientBalanceException ignored) {
             // ignore
         }
