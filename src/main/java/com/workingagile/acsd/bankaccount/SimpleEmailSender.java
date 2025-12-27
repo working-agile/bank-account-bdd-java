@@ -8,7 +8,6 @@ import org.simplejavamail.mailer.MailerBuilder;
 
 public class SimpleEmailSender implements EmailSender {
 
-
     @Override
     public void sendEmailToBank() {
 
