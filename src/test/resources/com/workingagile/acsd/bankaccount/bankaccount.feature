@@ -7,4 +7,4 @@ Feature: Manage bank account balance
 
     Given a savings account with a balance of 1000.00 USD
     When the customer deposits 200.00 USD into the account
-    Then the account the account balance should be 1200.00 USD
+    Then the balance of the account should be 1200.00 USD
