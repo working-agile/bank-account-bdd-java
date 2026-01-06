@@ -1,10 +1,10 @@
-Feature: Bank Account
+Feature: Manage bank account balance
 
   The Bank account feature allows clients to keep track of their current financial balance.
   Clients can deposit, withdraw and query their account balance.
 
-  Scenario: Deposit an amount into the bank account
+  Scenario: Successful deposit updates the balance
 
-    Given a bank account with the initial balance of 1000
-    When a client deposits 200
-    Then the account should have a balance of 1200
+    Given a savings account with a balance of 1000.00 USD
+    When the customer deposits 200.00 USD into the account
+    Then the account the account balance should be 1200.00 USD
