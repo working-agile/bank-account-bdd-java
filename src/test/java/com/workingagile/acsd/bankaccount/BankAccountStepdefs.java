@@ -7,11 +7,12 @@ import io.cucumber.java.en.When;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BankAccountStepdefs {
 
     private BankAccount account;
+    private Throwable lastWithdrawalError;
 
     @Given("a savings account with a balance of {double} USD")
     public void aSavingsAccountWithABalanceOfUSD(Double initialBalance) {
@@ -30,15 +31,24 @@ public class BankAccountStepdefs {
     }
 
     @When("the customer withdraws {double} USD from the account")
-    public void the_customer_withdraws_usd_from_the_account(Double double1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_customer_withdraws_usd_from_the_account(Double amount) {
+        // TDD: propose a new domain method to be implemented in production code
+        // public void withdraw(BigDecimal amount) throws InsufficientFundsException
+        //  - on success: reduce balance by amount
+        //  - on insufficient funds: do not change balance, throw InsufficientFundsException
+        try {
+            this.account.withdraw(toMoney(amount));
+            this.lastWithdrawalError = null;
+        } catch (InsufficientFundsException e) {
+            this.lastWithdrawalError = e;
+        }
     }
 
     @Then("the withdrawal should be declined due to insufficient funds")
     public void the_withdrawal_should_be_declined_due_to_insufficient_funds() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertNotNull(lastWithdrawalError, "Expected withdrawal to be declined with a business exception");
+        assertTrue(lastWithdrawalError instanceof InsufficientFundsException,
+                "Expected InsufficientFundsException to signal insufficient funds");
     }
 
 
