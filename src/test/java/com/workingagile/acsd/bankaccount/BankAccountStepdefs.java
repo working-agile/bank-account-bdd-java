@@ -1,5 +1,6 @@
 package com.workingagile.acsd.bankaccount;
 
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,30 +15,30 @@ public class BankAccountStepdefs {
     private BankAccount account;
     private Throwable lastWithdrawalError;
 
-    @Given("a savings account with a balance of {double} USD")
-    public void aSavingsAccountWithABalanceOfUSD(Double initialBalance) {
-        this.account = new BankAccount(toMoney(initialBalance));
+    @ParameterType("[-+]?\\d+(?:\\.\\d{1,2})?")
+    public BigDecimal money(String amount) {
+        return new BigDecimal(amount).setScale(2, RoundingMode.HALF_EVEN);
     }
 
-    @When("the customer deposits {double} USD into the account")
-    public void theCustomerDepositsUSDIntoTheAccount(Double amount) {
-        this.account.deposit(toMoney(amount));
+    @Given("a savings account with a balance of {money} USD")
+    public void a_savings_account_with_a_balance_of_usd(BigDecimal initialBalance) {
+        this.account = new BankAccount(initialBalance);
     }
 
-    @Then("the balance of the account should remain {double} USD")
-    @Then("the balance of the account should be {double} USD")
-    public void theBalanceOfTheAccountShouldBeUSD(Double expected) {
+    @When("the customer deposits {money} USD into the account")
+    public void the_customer_deposits_usd_into_the_account(BigDecimal amount) {
+        this.account.deposit(amount);
+    }
+
+    @Then("the balance of the account should remain/be {money} USD")
+    public void the_balance_of_the_account_should_be_usd(BigDecimal expected) {
         assertMoneyEquals(expected, account.getBalance());
     }
 
-    @When("the customer withdraws {double} USD from the account")
-    public void the_customer_withdraws_usd_from_the_account(Double amount) {
-        // TDD: propose a new domain method to be implemented in production code
-        // public void withdraw(BigDecimal amount) throws InsufficientFundsException
-        //  - on success: reduce balance by amount
-        //  - on insufficient funds: do not change balance, throw InsufficientFundsException
+    @When("the customer withdraws {money} USD from the account")
+    public void the_customer_withdraws_usd_from_the_account(BigDecimal amount) {
         try {
-            this.account.withdraw(toMoney(amount));
+            this.account.withdraw(amount);
             this.lastWithdrawalError = null;
         } catch (InsufficientFundsException e) {
             this.lastWithdrawalError = e;
@@ -51,18 +52,7 @@ public class BankAccountStepdefs {
                 "Expected InsufficientFundsException to signal insufficient funds");
     }
 
-
-
-
-
-
-
-    private static BigDecimal toMoney(Double value) {
-        return BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_EVEN);
-    }
-
-    private static void assertMoneyEquals(Double expected, BigDecimal actual) {
-        BigDecimal exp = toMoney(expected);
-        assertEquals(0, exp.compareTo(actual), "Unexpected account balance");
+    private static void assertMoneyEquals(BigDecimal expected, BigDecimal actual) {
+        assertEquals(0, expected.compareTo(actual), "Unexpected account balance");
     }
 }
