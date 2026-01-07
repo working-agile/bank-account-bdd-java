@@ -24,6 +24,8 @@ public class BankAccount {
         BigDecimal newBalance = this.balance.subtract(money);
         if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
             // business rule: do not allow overdraft
+            // publish a domain event before signaling the error
+            DomainEvents.publish(new OverdraftAttempted(money, this.balance));
             throw new InsufficientFundsException();
         }
         this.balance = newBalance;
