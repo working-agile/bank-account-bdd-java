@@ -3,9 +3,6 @@ package com.workingagile.acsd.bankaccount;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-/**
- * Minimal domain object representing a bank account balance and deposit behavior.
- */
 public class BankAccount {
 
     private BigDecimal balance;
@@ -22,12 +19,14 @@ public class BankAccount {
         return balance;
     }
 
-    /**
-     * Placeholder API for withdrawals. Intentionally left without behavior to satisfy compilation only.
-     * Functional implementation will be provided by TDD in a later step.
-     */
     public void withdraw(BigDecimal amount) throws InsufficientFundsException {
-        // no-op: production behavior intentionally not implemented yet
+        BigDecimal money = toMoney(amount);
+        BigDecimal newBalance = this.balance.subtract(money);
+        if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
+            // business rule: do not allow overdraft
+            throw new InsufficientFundsException();
+        }
+        this.balance = newBalance;
     }
 
     private static BigDecimal toMoney(BigDecimal value) {
