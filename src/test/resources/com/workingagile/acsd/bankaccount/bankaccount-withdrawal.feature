@@ -11,9 +11,9 @@ Feature: Withdraw funds from a bank account
 
     Scenario: Successful withdrawal
       When the customer withdraws 200.00 USD from the account
-      Then the balance of the account is 800.00 USD
+      Then the balance of the account should be 800.00 USD
 
     Scenario: Withdrawal above available balance is declined
       When the customer withdraws 1100.00 USD from the account
-      Then the withdrawal is declined due to insufficient funds
-      And the balance of the account remains 1000.00 USD
+      Then the withdrawal should be declined due to insufficient funds
+      And the balance of the account should remain 1000.00 USD
