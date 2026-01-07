@@ -6,9 +6,15 @@ import java.math.RoundingMode;
 public class BankAccount {
 
     private BigDecimal balance;
+    private final DomainEvents domainEvents;
 
     public BankAccount(BigDecimal initialBalance) {
+        this(initialBalance, new SimpleDomainEvents());
+    }
+
+    public BankAccount(BigDecimal initialBalance, DomainEvents domainEvents) {
         this.balance = toMoney(initialBalance);
+        this.domainEvents = domainEvents;
     }
 
     public void deposit(BigDecimal amount) {
@@ -25,7 +31,9 @@ public class BankAccount {
         if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
             // business rule: do not allow overdraft
             // publish a domain event before signaling the error
-            DomainEvents.publish(new OverdraftAttempted(money, this.balance));
+            if (domainEvents != null) {
+                domainEvents.publish(new OverdraftAttempted(money, this.balance));
+            }
             throw new InsufficientFundsException();
         }
         this.balance = newBalance;

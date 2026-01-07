@@ -16,6 +16,7 @@ public class BankAccountStepdefs {
     private BankAccount account;
     private Throwable lastWithdrawalError;
     private InMemoryEmailGateway emailGateway;
+    private DomainEvents domainEvents;
 
     @ParameterType("[-+]?\\d+(?:\\.\\d{1,2})?")
     public BigDecimal money(String amount) {
@@ -26,19 +27,20 @@ public class BankAccountStepdefs {
     public void before_scenario_setup() {
         // Reset scenario state and register email handler for overdraft events
         this.emailGateway = new InMemoryEmailGateway();
-        DomainEvents.clearAllSubscribers();
-        DomainEvents.register(OverdraftAttempted.class, evt -> new OverdraftEmailHandler(emailGateway).on(evt));
+        this.domainEvents = new SimpleDomainEvents();
+        this.domainEvents.clear();
+        this.domainEvents.register(OverdraftAttempted.class, evt -> new OverdraftEmailHandler(emailGateway).on(evt));
         this.lastWithdrawalError = null;
     }
 
     @Given("a savings account with a balance of {money} USD")
     public void a_savings_account_with_a_balance_of_usd(BigDecimal initialBalance) {
-        this.account = new BankAccount(initialBalance);
+        this.account = new BankAccount(initialBalance, domainEvents);
     }
 
     @Given("a customer account has a balance of {money} USD")
     public void a_customer_account_has_a_balance_of_usd(BigDecimal initialBalance) {
-        this.account = new BankAccount(initialBalance);
+        this.account = new BankAccount(initialBalance, domainEvents);
     }
 
     @When("the customer deposits {money} USD into the account")
