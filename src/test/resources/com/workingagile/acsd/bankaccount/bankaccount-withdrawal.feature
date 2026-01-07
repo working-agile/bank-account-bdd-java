@@ -1,17 +1,19 @@
-Feature: Bank Account withdrawal
+Feature: Withdraw funds from a bank account
 
-  The Bank account feature allows clients to withdraw money from their bank account.
-  Overdrafting is not allowed.
+  In order to access my money
+  As a bank customer
+  I want to withdraw funds from my account
 
-  Scenario: Withdrawing from a bank account
+  Background:
+    Given a savings account with a balance of 1000.00 USD
 
-    Given a bank account with the initial balance of 1000
-    When a client withdraws 200
-    Then the account should have a balance of 800
+  Rule: Cash withdrawal reduces the available balance
 
-  Scenario: Overdraft from a bank account is not allowed
+    Scenario: Successful withdrawal
+      When the customer withdraws 200.00 USD from the account
+      Then the balance of the account is 800.00 USD
 
-    Given a bank account with the initial balance of 1000
-    When a client withdraws 1100
-    Then the withdrawal should be cancelled
-    And the account should have a balance of 1000
+    Scenario: Withdrawal above available balance is declined
+      When the customer withdraws 1100.00 USD from the account
+      Then the withdrawal is declined due to insufficient funds
+      And the balance of the account remains 1000.00 USD
